@@ -1,0 +1,24 @@
+{
+  "name": "protected-react-router",
+  "version": "1.0.0",
+  "description": "Authentication and authorization access control layer for react-router",
+  "main": "index.t s",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "protected",
+    "react",
+    "router",
+    "authentication",
+    "authorization"
+  ],
+  "author": "Denis Balazic",
+  "license": "ISC",
+  "dependencies": {
+    "react-router-dom": "^6.4.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.21"
+  }
+}
