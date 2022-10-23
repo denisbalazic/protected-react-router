@@ -2,28 +2,28 @@ import React, {ReactElement} from 'react';
 import {Navigate} from 'react-router-dom';
 
 interface ProtectedRouteProps {
-    auth?: boolean;
-    permissions?: string[];
+    isPrivate?: boolean;
+    roles?: string[];
     isAuthed?: boolean;
-    userPermissions?: string[];
+    userRoles?: string[];
     loginRoute?: string;
     notAuthorizedRoute?: string;
     children: any;
 }
 
 const ProtectedRoute = ({
-    auth,
-    permissions,
+    isPrivate,
+    roles,
     isAuthed,
-    userPermissions,
+    userRoles,
     loginRoute,
     notAuthorizedRoute,
     children,
 }: ProtectedRouteProps): ReactElement | null => {
-    if (auth && !isAuthed) {
+    if (isPrivate && !isAuthed) {
         return <Navigate to={loginRoute || '/'} />;
     }
-    if (permissions && !permissions?.every((p) => userPermissions?.includes(p))) {
+    if (roles && !roles?.every((p) => userRoles?.includes(p))) {
         return <Navigate to={notAuthorizedRoute || '/'} />;
     }
     return children;

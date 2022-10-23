@@ -1,17 +1,17 @@
 import React, {cloneElement, ReactElement, ReactNode} from 'react';
 import {Route, Routes, RoutesProps} from 'react-router-dom';
 import EnhancedRoute from './EnhancedRoute';
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from './ProtectedRoute';
 
 interface EnhancedRoutesProps extends RoutesProps {
     isAuthed?: boolean;
-    userPermissions?: string[];
+    userRoles?: string[];
     loginRoute?: string;
     notAuthorizedRoute?: string;
 }
 
 const EnhancedRoutes = (props: EnhancedRoutesProps): ReactElement | null => {
-    const {isAuthed, userPermissions, loginRoute, notAuthorizedRoute, children, ...rest} = props;
+    const {isAuthed, userRoles, loginRoute, notAuthorizedRoute, children, ...rest} = props;
 
     const createRoutesFromChildren = (children: ReactNode | ReactNode[]): ReactElement[] => {
         const routes: ReactElement[] = [];
@@ -35,15 +35,15 @@ const EnhancedRoutes = (props: EnhancedRoutesProps): ReactElement | null => {
             }
 
             let routeProps = element.props;
-            if (element.props.auth || element.props.permissions) {
+            if (element.props.isPrivate || element.props.roles) {
                 routeProps = {
                     ...routeProps,
                     element: (
                         <ProtectedRoute
-                            auth={element.props.auth}
-                            permissions={element.props.permissions}
+                            isPrivate={element.props.isPrivate}
+                            roles={element.props.roles}
                             isAuthed={isAuthed}
-                            userPermissions={userPermissions}
+                            userRoles={userRoles}
                             loginRoute={loginRoute}
                             notAuthorizedRoute={notAuthorizedRoute}
                         >

@@ -1,5 +1,4 @@
-import EnhancedRoutes from "./EnhancedRoutes";
-import EnhancedRoute from "./EnhancedRoute";
-import ProtectedRoute from "./ProtectedRoute";
+import EnhancedRoutes from './EnhancedRoutes';
+import EnhancedRoute from './EnhancedRoute';
 
-export {EnhancedRoutes, EnhancedRoute, ProtectedRoute};
+export {EnhancedRoutes, EnhancedRoute};
