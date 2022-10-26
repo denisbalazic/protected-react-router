@@ -8,7 +8,6 @@ type EnhancedRouteProps = RouteProps & {
 };
 
 const EnhancedRoute = (props: EnhancedRouteProps): ReactElement | null => {
-    console.log(props);
     return null;
 };
 

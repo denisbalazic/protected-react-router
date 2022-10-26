@@ -33,10 +33,10 @@ const EnhancedRoutes = (props: EnhancedRoutesProps): ReactElement | null => {
             }
 
             if (element.type !== EnhancedRoute) {
-                console.log(
+                /*console.log(
                     `[${typeof element.type === 'string' ? element.type : element.type.name}]
                         is not a <Route> component. All component children of <Routes> must be a <Route>`
-                );
+                );*/
                 return;
             }
 
