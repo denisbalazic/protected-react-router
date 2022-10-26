@@ -6,12 +6,23 @@ import ProtectedRoute from './ProtectedRoute';
 interface EnhancedRoutesProps extends RoutesProps {
     isAuthed?: boolean;
     userRoles?: string[];
-    loginRoute?: string;
+    notAuthenticatedRoute?: string;
+    notAuthenticatedAction?: () => void;
     notAuthorizedRoute?: string;
+    notAuthorizedAction?: () => void;
 }
 
 const EnhancedRoutes = (props: EnhancedRoutesProps): ReactElement | null => {
-    const {isAuthed, userRoles, loginRoute, notAuthorizedRoute, children, ...rest} = props;
+    const {
+        isAuthed,
+        userRoles,
+        notAuthenticatedRoute,
+        notAuthenticatedAction,
+        notAuthorizedRoute,
+        notAuthorizedAction,
+        children,
+        ...rest
+    } = props;
 
     const createRoutesFromChildren = (children: ReactNode | ReactNode[]): ReactElement[] => {
         const routes: ReactElement[] = [];
@@ -44,8 +55,10 @@ const EnhancedRoutes = (props: EnhancedRoutesProps): ReactElement | null => {
                             roles={element.props.roles}
                             isAuthed={isAuthed}
                             userRoles={userRoles}
-                            loginRoute={loginRoute}
+                            notAuthenticatedRoute={notAuthenticatedRoute}
+                            notAuthenticatedAction={notAuthenticatedAction}
                             notAuthorizedRoute={notAuthorizedRoute}
+                            notAuthorizedAction={notAuthorizedAction}
                         >
                             {element.props.element}
                         </ProtectedRoute>
