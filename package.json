@@ -2,13 +2,15 @@
   "name": "protected-react-router",
   "version": "1.0.0",
   "description": "Authentication and authorization access control layer for react-router",
-  "main": "index.t s",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
   "keywords": [
     "protected",
+    "private",
     "react",
     "router",
     "authentication",
@@ -22,5 +24,11 @@
   "devDependencies": {
     "@types/react": "^18.0.21",
     "typescript": "^4.8.4"
-  }
+  },
+  "files": ["build/**/*"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denisbalazic/protected-react-router"
+  },
+  "homepage": "https://github.com/denisbalazic/protected-react-router#readme"
 }
