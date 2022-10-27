@@ -6,6 +6,9 @@ Goal of this package is to add protection for routes that need authentication an
 That said, this is project in early stages of formation and is not working properly yet. It should be used for development purposes only.
 Help needed :)
 
+# Installation
+Install with `npm i protected-react-router`
+
 # Usage
 After installing **protected-react-router** you should import it in your router file/module
 (where you are using react-router) and replace `<Routes />` with `<PrRoutes />`,
