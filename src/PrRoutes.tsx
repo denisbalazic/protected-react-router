@@ -1,9 +1,9 @@
 import React, {cloneElement, ReactElement, ReactNode} from 'react';
 import {Route, Routes, RoutesProps} from 'react-router-dom';
-import EnhancedRoute from './EnhancedRoute';
+import PrRoute from './PrRoute';
 import ProtectedRoute from './ProtectedRoute';
 
-interface EnhancedRoutesProps extends RoutesProps {
+interface PrRoutesProps extends RoutesProps {
     isAuthed?: boolean;
     userRoles?: string[];
     notAuthenticatedRoute?: string;
@@ -12,7 +12,7 @@ interface EnhancedRoutesProps extends RoutesProps {
     notAuthorizedAction?: () => void;
 }
 
-const EnhancedRoutes = (props: EnhancedRoutesProps): ReactElement | null => {
+const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
     const {
         isAuthed,
         userRoles,
@@ -32,7 +32,7 @@ const EnhancedRoutes = (props: EnhancedRoutesProps): ReactElement | null => {
                 return;
             }
 
-            if (element.type !== EnhancedRoute) {
+            if (element.type !== PrRoute) {
                 /*console.log(
                     `[${typeof element.type === 'string' ? element.type : element.type.name}]
                         is not a <Route> component. All component children of <Routes> must be a <Route>`
@@ -75,4 +75,4 @@ const EnhancedRoutes = (props: EnhancedRoutesProps): ReactElement | null => {
     return <Routes {...rest}>{createRoutesFromChildren(children)}</Routes>;
 };
 
-export default EnhancedRoutes;
+export default PrRoutes;

@@ -1,4 +1,4 @@
-import EnhancedRoutes from './EnhancedRoutes';
-import EnhancedRoute from './EnhancedRoute';
+import PrRoutes from './PrRoutes';
+import PrRoute from './PrRoute';
 
-export {EnhancedRoutes, EnhancedRoute};
+export {PrRoutes, PrRoute};

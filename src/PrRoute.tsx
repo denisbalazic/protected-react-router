@@ -2,13 +2,13 @@
 import React, {ReactElement} from 'react';
 import {RouteProps} from 'react-router-dom';
 
-type EnhancedRouteProps = RouteProps & {
+type PrRouteProps = RouteProps & {
     isPrivate?: boolean;
     roles?: string[];
 };
 
-const EnhancedRoute = (props: EnhancedRouteProps): ReactElement | null => {
+const PrRoute = (props: PrRouteProps): ReactElement | null => {
     return null;
 };
 
-export default EnhancedRoute;
+export default PrRoute;
