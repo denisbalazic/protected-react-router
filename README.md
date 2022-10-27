@@ -2,7 +2,9 @@
 Authentication and authorization access control layer for react-router.
 Goal of this package is to add protection for routes that need authentication and authorization while keeping clear organization and structure that react-router provides, nested routes included.
 
-That said, this is project in early stages of formation and should be used for development purposes only.
+# <span style="color:red">In progress</span>
+That said, this is project in early stages of formation and is not working properly yet. It should be used for development purposes only.
+Help needed :)
 
 # Usage
 After installing **protected-react-router** you should import it in your router file/module
