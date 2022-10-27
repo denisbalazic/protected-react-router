@@ -33,11 +33,10 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
             }
 
             if (element.type !== PrRoute) {
-                /*console.log(
-                    `[${typeof element.type === 'string' ? element.type : element.type.name}]
-                        is not a <Route> component. All component children of <Routes> must be a <Route>`
-                );*/
-                return;
+                const errorMessage = `[${
+                    typeof element.type === 'string' ? element.type : element.type.name
+                }] is not a <PrRoute> component. All component children of <PrRoutes> must be a <PrRoute>`;
+                throw new Error(errorMessage);
             }
 
             let nextLevelChildren = null;
