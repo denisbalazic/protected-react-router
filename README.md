@@ -30,7 +30,7 @@ Now you can use those two components as you would normally use their react-route
 
 
 ### Example of router component:
-```
+```jsx
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {PrRoutes as Routes, PrRoute as Route} from 'protected-react-router';
@@ -38,7 +38,7 @@ import {PrRoutes as Routes, PrRoute as Route} from 'protected-react-router';
 
 const Router = () => {
     // access your app's authentication state with custom hook
-    const [authed, userRoles] = useAuth();
+    const [authed, roles] = useAuth();
     
     const notAuthenticatedAction = () => {
         // do some stuff like clear state/reducer and toast a message
@@ -66,7 +66,6 @@ const Router = () => {
                         <Route isPrivate path="new" element={<NewTeamForm />} />
                         <Route index element={<LeagueStandings />} />
                     </Route>
-                    </Route>
                     <Route isPrivate path="games" element={<Games />}>
                         <Route path=":gameId" element={<Game />} />
                         <Route roles={['admin']} path=":gameId/edit" element={<EditGame />} />
@@ -89,7 +88,7 @@ I have used example from [react-router page](https://reactrouter.com/en/main/sta
 ### Location.state
 Also, when redirected due to false authentication and/or authorization, route path is added to react-router's location object in `location.state.fromRoute`
 so you can access it on redirected page with:
-```
+```jsx
 const location = useLocation();
 const commingFromRoute = location.state.fromRoute
 ```
