@@ -5,7 +5,6 @@ import Navigation from "./Navigation";
 const Layout = () => {
     return (
         <>
-            <p>layout</p>
             <Navigation />
             <Outlet />
         </>
