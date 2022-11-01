@@ -3,7 +3,8 @@ import {NavLink} from "react-router-dom";
 import usePseudoStore from "../pseudoStore/usePseudoStore";
 
 const Navigation = () => {
-    const {setUser} = usePseudoStore();
+    const {getUser, setUser} = usePseudoStore();
+    const {authed, roles} = getUser();
     const handleLogout = () => {
         setUser(false, undefined);
     }
@@ -22,10 +23,23 @@ const Navigation = () => {
             <NavLink to={"/cats"} end className={({isActive}) => isActive ? 'navlink active' : 'navlink'}>
                 Cats
             </NavLink>
-            <NavLink to={"/login"} end className={({isActive}) => isActive ? 'navlink active' : 'navlink'}>
-                Login
-            </NavLink>
-            <button className="navlink" onClick={handleLogout}>Logout</button>
+
+            {authed ? (
+                <>
+                    <div className="navlink" style={{display: "flex"}}>
+                        <p>Authed:</p>
+                        {roles ? roles.map((role: string) => (
+                            <p>{role}</p>
+                        )) : 'no role'}
+                    </div>
+                    <div className="navlink" onClick={handleLogout}>Logout</div>
+                </>
+            ) : (
+                <NavLink to={"/login"} end className={({isActive}) => isActive ? 'navlink active' : 'navlink'}>
+                    Login
+                </NavLink>
+            )}
+
         </div>
     );
 };
