@@ -2,6 +2,7 @@ import React, {cloneElement, ReactElement, ReactNode} from 'react';
 import {Route, Routes, RoutesProps} from 'react-router-dom';
 import PrRoute from './PrRoute';
 import ProtectedRoute from './ProtectedRoute';
+import AuthProvider from './AuthProvider';
 
 interface PrRoutesProps extends RoutesProps {
     authenticated?: boolean;
@@ -64,14 +65,20 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
                     ),
                 };
             }
-            const route = cloneElement(<Route />, routeProps, nextLevelChildren);
+            const route = cloneElement(<Route/>, routeProps, nextLevelChildren);
             routes.push(route);
         });
 
         return routes;
     };
 
-    return <Routes {...rest}>{createRoutesFromChildren(children)}</Routes>;
+    return (
+        <AuthProvider isAuthed={isAuthed} userRoles={userRoles}>
+            <Routes {...rest}>
+                {createRoutesFromChildren(children)}
+            </Routes>
+        </AuthProvider>
+    );
 };
 
 export default PrRoutes;
