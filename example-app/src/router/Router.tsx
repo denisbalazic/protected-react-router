@@ -29,7 +29,7 @@ const Router = (): ReactElement => {
                 <Route path={"/"} element={<Layout/>}>
                     <Route index element={<Home />} />
                     <Route path="about" element={<About />} />
-                    <Route path={"dogs"} element={<Dogs />} >
+                    <Route  path={"dogs"} element={<Dogs />} >
                         <Route index element={<DogIndex />} />
                         <Route path={":dogId"} element={<Dog />} />
                         <Route path={":dogId/edit"} element={<EditDogForm />} />
