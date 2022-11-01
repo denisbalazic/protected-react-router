@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import useFakeDB from "../fakeDB/useFakeDB";
+import usePseudoStore from "../pseudoStore/usePseudoStore";
 import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const [role, setRole] = useState<string>();
-    const {setUser} = useFakeDB();
+    const {setUser} = usePseudoStore();
     const navigate = useNavigate();
 
     const handleSubmit = (e: any) => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import useFakeDB from "../fakeDB/useFakeDB";
+import usePseudoStore from "../pseudoStore/usePseudoStore";
 
 const Navigation = () => {
-    const {setUser} = useFakeDB();
+    const {setUser} = usePseudoStore();
     const handleLogout = () => {
         setUser(false, undefined);
     }
@@ -16,11 +16,11 @@ const Navigation = () => {
             <NavLink to={"/about"} end className={({isActive}) => isActive ? 'navlink active' : 'navlink'}>
                 About
             </NavLink>
-            <NavLink to={"/movies"} end className={({isActive}) => isActive ? 'navlink active' : 'navlink'}>
-                Movies
+            <NavLink to={"/dogs"} end className={({isActive}) => isActive ? 'navlink active' : 'navlink'}>
+                Dogs
             </NavLink>
-            <NavLink to={"/messages"} end className={({isActive}) => isActive ? 'navlink active' : 'navlink'}>
-                Messages
+            <NavLink to={"/cats"} end className={({isActive}) => isActive ? 'navlink active' : 'navlink'}>
+                Cats
             </NavLink>
             <NavLink to={"/login"} end className={({isActive}) => isActive ? 'navlink active' : 'navlink'}>
                 Login

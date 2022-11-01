@@ -1,7 +1,7 @@
 import {seed} from "./seed";
 
 export const seedLocalStorage = () => {
-    localStorage.setItem('MOVIES', JSON.stringify(seed.movies));
+    localStorage.setItem('DOGS', JSON.stringify(seed.dogs));
 }
 
 export const addItemToLocalStorage = (resourceName: string, item: any) => {

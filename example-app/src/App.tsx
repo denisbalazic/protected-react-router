@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from "./router/Router";
-import FakeDBProvider from "./fakeDB/fakeDBContext";
+import FakeDBProvider from "./pseudoStore/pseudoStoreContext";
 
 function App() {
     return (

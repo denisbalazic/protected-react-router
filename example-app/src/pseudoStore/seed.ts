@@ -1,46 +1,46 @@
 export const seed = {
-    movies: [
+    cats: [
         {
             id: 1,
-            title: 'Vanilla sky'
+            name: 'Mrle'
         },
         {
             id: 2,
-            title: 'Jackie Brown'
+            name: 'Kitty'
         },
         {
             id: 3,
-            title: 'Forrest Gump'
+            name: 'Katty'
         },
         {
             id: 4,
-            title: '2001: A Space Odyssey'
+            name: 'Tom'
         },
         {
             id: 5,
-            title: 'Magnolia'
+            name: 'Garfield'
         },
     ],
-    messages: [
+    dogs: [
         {
             id: 1,
-            text: 'hi'
+            name: 'Rex'
         },
         {
             id: 2,
-            text: 'hello'
+            name: 'Thunder'
         },
         {
             id: 3,
-            text: 'whatup'
+            name: 'Lassie'
         },
         {
             id: 4,
-            text: 'hazza!'
+            name: 'Hutch'
         },
         {
             id: 5,
-            text: 'have a nice day!!!'
+            name: 'Doggy Dog'
         },
     ],
     user: {
