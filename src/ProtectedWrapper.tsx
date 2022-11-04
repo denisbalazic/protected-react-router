@@ -1,21 +1,18 @@
-import React, {ReactElement, useContext} from 'react';
+import React, {PropsWithChildren, ReactNode, useContext} from 'react';
 import {authContext} from "./AuthProvider";
 
 interface ProtectedWrapperProps {
     isPrivate?: boolean;
     roles?: string[];
-    isAuthed?: boolean;
-    userRoles?: string[];
-    children: any;
 }
 
-const ProtectedWrapper = ({isPrivate, roles, children}: ProtectedWrapperProps): ReactElement | null => {
-    const {isAuthed, userRoles} = useContext(authContext);
+const ProtectedWrapper = ({isPrivate, roles, children}: PropsWithChildren<ProtectedWrapperProps>): ReactNode => {
+    const {authenticated, userRoles} = useContext(authContext);
 
-    if (isPrivate && !isAuthed) {
+    if (isPrivate && !authenticated) {
         return null;
     }
-    if (roles && !roles?.every((p) => userRoles?.includes(p))) {
+    if (roles && !roles?.every((role) => userRoles?.includes(role))) {
         return null;
     }
     return children;

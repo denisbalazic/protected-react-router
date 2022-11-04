@@ -1,19 +1,18 @@
 import {createContext, PropsWithChildren, useEffect, useState} from 'react';
 import {Location, useLocation} from "react-router-dom";
 
-type AuthProviderProps = PropsWithChildren & {
-    isAuthed?: boolean;
+interface AuthProviderProps {
+    authenticated?: boolean;
     userRoles?: string[];
-};
+}
 
 export const authContext = createContext<any>({
-    isAuthed: false,
+    authenticated: false,
     userRoles: [],
-    lastLocation: '/',
 });
 
-const AuthProvider = (props: AuthProviderProps) => {
-    const {isAuthed, userRoles} = props;
+const AuthProvider = (props: PropsWithChildren<AuthProviderProps>) => {
+    const {authenticated, userRoles} = props;
     const [lastLocation, setLastLocation] = useState<Location>();
 
     const location = useLocation();
@@ -25,7 +24,7 @@ const AuthProvider = (props: AuthProviderProps) => {
     },[location])
 
     return (
-        <authContext.Provider value={{isAuthed, userRoles, lastLocation}}>
+        <authContext.Provider value={{authenticated: authenticated, userRoles, lastLocation}}>
             {props.children}
         </authContext.Provider>
     );

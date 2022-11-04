@@ -73,7 +73,7 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
     };
 
     return (
-        <AuthProvider isAuthed={isAuthed} userRoles={userRoles}>
+        <AuthProvider authenticated={authenticated} userRoles={userRoles}>
             <Routes {...rest}>
                 {createRoutesFromChildren(children)}
             </Routes>
