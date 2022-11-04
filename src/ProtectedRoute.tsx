@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React, {PropsWithChildren, ReactElement} from 'react';
 import {Navigate, useLocation} from 'react-router-dom';
 
 interface ProtectedRouteProps {
@@ -10,7 +10,6 @@ interface ProtectedRouteProps {
     notAuthenticatedAction?: () => void;
     notAuthorizedRoute?: string;
     notAuthorizedAction?: () => void;
-    children: any;
 }
 
 const ProtectedRoute = ({
@@ -23,7 +22,7 @@ const ProtectedRoute = ({
     notAuthorizedRoute,
     notAuthorizedAction,
     children,
-}: ProtectedRouteProps): ReactElement | null => {
+}: PropsWithChildren<ProtectedRouteProps>): ReactElement => {
     const location = useLocation();
 
     if (isPrivate && !authenticated) {
@@ -34,7 +33,7 @@ const ProtectedRoute = ({
         notAuthorizedAction && notAuthorizedAction();
         return <Navigate to={notAuthorizedRoute || '/'} state={{fromRoute: location.pathname}} />;
     }
-    return children;
+    return children as ReactElement;
 };
 
 export default ProtectedRoute;
