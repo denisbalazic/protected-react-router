@@ -4,7 +4,7 @@ import {Navigate, useLocation} from 'react-router-dom';
 interface ProtectedRouteProps {
     isPrivate?: boolean;
     roles?: string[];
-    isAuthed?: boolean;
+    authenticated?: boolean;
     userRoles?: string[];
     notAuthenticatedRoute?: string;
     notAuthenticatedAction?: () => void;
@@ -16,17 +16,17 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({
     isPrivate,
     roles,
-    isAuthed,
-    userRoles,
+    authenticated,
     notAuthenticatedRoute,
     notAuthenticatedAction,
+    userRoles,
     notAuthorizedRoute,
     notAuthorizedAction,
     children,
 }: ProtectedRouteProps): ReactElement | null => {
     const location = useLocation();
 
-    if (isPrivate && !isAuthed) {
+    if (isPrivate && !authenticated) {
         notAuthenticatedAction && notAuthenticatedAction();
         return <Navigate to={notAuthenticatedRoute || '/'} state={{fromRoute: location.pathname}} />;
     }

@@ -4,20 +4,20 @@ import PrRoute from './PrRoute';
 import ProtectedRoute from './ProtectedRoute';
 
 interface PrRoutesProps extends RoutesProps {
-    isAuthed?: boolean;
-    userRoles?: string[];
+    authenticated?: boolean;
     notAuthenticatedRoute?: string;
     notAuthenticatedAction?: () => void;
+    userRoles?: string[];
     notAuthorizedRoute?: string;
     notAuthorizedAction?: () => void;
 }
 
 const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
     const {
-        isAuthed,
-        userRoles,
+        authenticated,
         notAuthenticatedRoute,
         notAuthenticatedAction,
+        userRoles,
         notAuthorizedRoute,
         notAuthorizedAction,
         children,
@@ -52,7 +52,7 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
                         <ProtectedRoute
                             isPrivate={element.props.isPrivate}
                             roles={element.props.roles}
-                            isAuthed={isAuthed}
+                            authenticated={authenticated}
                             userRoles={userRoles}
                             notAuthenticatedRoute={notAuthenticatedRoute}
                             notAuthenticatedAction={notAuthenticatedAction}
