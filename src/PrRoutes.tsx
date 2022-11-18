@@ -2,22 +2,25 @@ import React, {cloneElement, ReactElement, ReactNode} from 'react';
 import {Route, Routes, RoutesProps} from 'react-router-dom';
 import PrRoute from './PrRoute';
 import ProtectedRoute from './ProtectedRoute';
+import AuthProvider from './AuthProvider';
 
 interface PrRoutesProps extends RoutesProps {
-    isAuthed?: boolean;
-    userRoles?: string[];
+    authenticated?: boolean;
     notAuthenticatedRoute?: string;
     notAuthenticatedAction?: () => void;
+    userRoles?: string[];
+    rolesHierarchy?: string[];
     notAuthorizedRoute?: string;
     notAuthorizedAction?: () => void;
 }
 
 const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
     const {
-        isAuthed,
-        userRoles,
+        authenticated,
         notAuthenticatedRoute,
         notAuthenticatedAction,
+        userRoles,
+        rolesHierarchy,
         notAuthorizedRoute,
         notAuthorizedAction,
         children,
@@ -44,26 +47,25 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
                 nextLevelChildren = createRoutesFromChildren(element.props.children);
             }
 
-            let routeProps = element.props;
-            if (element.props.isPrivate || element.props.roles) {
-                routeProps = {
-                    ...routeProps,
-                    element: (
-                        <ProtectedRoute
-                            isPrivate={element.props.isPrivate}
-                            roles={element.props.roles}
-                            isAuthed={isAuthed}
-                            userRoles={userRoles}
-                            notAuthenticatedRoute={notAuthenticatedRoute}
-                            notAuthenticatedAction={notAuthenticatedAction}
-                            notAuthorizedRoute={notAuthorizedRoute}
-                            notAuthorizedAction={notAuthorizedAction}
-                        >
-                            {element.props.element}
-                        </ProtectedRoute>
-                    ),
-                };
-            }
+            const routeProps = {
+                ...element.props,
+                element: (
+                    <ProtectedRoute
+                        isPrivate={element.props.isPrivate}
+                        roles={element.props.roles}
+                        authenticated={authenticated}
+                        userRoles={userRoles}
+                        rolesHierarchy={rolesHierarchy}
+                        notAuthenticatedRoute={notAuthenticatedRoute}
+                        notAuthenticatedAction={notAuthenticatedAction}
+                        notAuthorizedRoute={notAuthorizedRoute}
+                        notAuthorizedAction={notAuthorizedAction}
+                    >
+                        {element.props.element}
+                    </ProtectedRoute>
+                ),
+            };
+
             const route = cloneElement(<Route />, routeProps, nextLevelChildren);
             routes.push(route);
         });
@@ -71,7 +73,11 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
         return routes;
     };
 
-    return <Routes {...rest}>{createRoutesFromChildren(children)}</Routes>;
+    return (
+        <AuthProvider authenticated={authenticated} userRoles={userRoles} rolesHierarchy={rolesHierarchy}>
+            <Routes {...rest}>{createRoutesFromChildren(children)}</Routes>
+        </AuthProvider>
+    );
 };
 
 export default PrRoutes;
