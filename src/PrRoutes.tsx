@@ -47,27 +47,25 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
                 nextLevelChildren = createRoutesFromChildren(element.props.children);
             }
 
-            let routeProps = element.props;
-            if (element.props.isPrivate || element.props.roles) {
-                routeProps = {
-                    ...routeProps,
-                    element: (
-                        <ProtectedRoute
-                            isPrivate={element.props.isPrivate}
-                            roles={element.props.roles}
-                            authenticated={authenticated}
-                            userRoles={userRoles}
-                            rolesHierarchy={rolesHierarchy}
-                            notAuthenticatedRoute={notAuthenticatedRoute}
-                            notAuthenticatedAction={notAuthenticatedAction}
-                            notAuthorizedRoute={notAuthorizedRoute}
-                            notAuthorizedAction={notAuthorizedAction}
-                        >
-                            {element.props.element}
-                        </ProtectedRoute>
-                    ),
-                };
-            }
+            const routeProps = {
+                ...element.props,
+                element: (
+                    <ProtectedRoute
+                        isPrivate={element.props.isPrivate}
+                        roles={element.props.roles}
+                        authenticated={authenticated}
+                        userRoles={userRoles}
+                        rolesHierarchy={rolesHierarchy}
+                        notAuthenticatedRoute={notAuthenticatedRoute}
+                        notAuthenticatedAction={notAuthenticatedAction}
+                        notAuthorizedRoute={notAuthorizedRoute}
+                        notAuthorizedAction={notAuthorizedAction}
+                    >
+                        {element.props.element}
+                    </ProtectedRoute>
+                ),
+            };
+
             const route = cloneElement(<Route />, routeProps, nextLevelChildren);
             routes.push(route);
         });
