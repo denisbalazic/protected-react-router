@@ -11,16 +11,19 @@ export const authContext = createContext<any>({
     authenticated: false,
     userRoles: [],
     rolesHierarchy: [],
+    lastLocation: undefined,
 });
 
 const AuthProvider = ({authenticated, userRoles, rolesHierarchy, children}: PropsWithChildren<AuthProviderProps>) => {
     const [lastLocation, setLastLocation] = useState<Location>();
+    const [newLocation, setNewLocation] = useState<Location>();
 
     const location = useLocation();
 
     useEffect(() => {
-        if (lastLocation !== location) {
-            setLastLocation(location);
+        if (newLocation !== location) {
+            setLastLocation(newLocation);
+            setNewLocation(location);
         }
     }, [location]);
 

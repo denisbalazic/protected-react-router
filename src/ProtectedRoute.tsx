@@ -33,12 +33,12 @@ const ProtectedRoute = ({
 
     if ((isPrivate && !(authenticated || userRoles?.length)) || (roles && !userRoles?.length)) {
         notAuthenticatedAction && notAuthenticatedAction();
-        return <Navigate to={notAuthenticatedRoute || '/'} state={{fromRoute: location.pathname}} />;
+        return <Navigate to={notAuthenticatedRoute || '/'} state={{redirectedFromRoute: location.pathname}} />;
     }
 
     if (roles && !rolesHierarchy && !userRoles?.some((ur) => roles?.includes(ur))) {
         notAuthorizedAction && notAuthorizedAction();
-        return <Navigate to={notAuthorizedRoute || '/'} state={{fromRoute: location.pathname}} />;
+        return <Navigate to={notAuthorizedRoute || '/'} state={{redirectedFromRoute: location.pathname}} />;
     }
 
     if (
@@ -47,7 +47,7 @@ const ProtectedRoute = ({
         !userRoles?.some((ur) => getAuthorizedRolesFromRolesHierarchy(roles[0], rolesHierarchy)?.includes(ur))
     ) {
         notAuthorizedAction && notAuthorizedAction();
-        return <Navigate to={notAuthorizedRoute || '/'} state={{fromRoute: location.pathname}} />;
+        return <Navigate to={notAuthorizedRoute || '/'} state={{redirectedFromRoute: location.pathname}} />;
     }
     return children as ReactElement;
 };
