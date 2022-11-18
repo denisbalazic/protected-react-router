@@ -6,6 +6,7 @@ interface ProtectedRouteProps {
     roles?: string[];
     authenticated?: boolean;
     userRoles?: string[];
+    rolesHierarchy?: string[];
     notAuthenticatedRoute?: string;
     notAuthenticatedAction?: () => void;
     notAuthorizedRoute?: string;
@@ -19,17 +20,32 @@ const ProtectedRoute = ({
     notAuthenticatedRoute,
     notAuthenticatedAction,
     userRoles,
+    rolesHierarchy,
     notAuthorizedRoute,
     notAuthorizedAction,
     children,
 }: PropsWithChildren<ProtectedRouteProps>): ReactElement => {
     const location = useLocation();
 
-    if (isPrivate && !authenticated) {
+    const getAuthorizedRolesFromRolesHierarchy = (role: string, rolesHierarchy: string[]): string[] => {
+        return rolesHierarchy.slice(rolesHierarchy.indexOf(role));
+    };
+
+    if ((isPrivate && !(authenticated || userRoles?.length)) || (roles && !userRoles?.length)) {
         notAuthenticatedAction && notAuthenticatedAction();
         return <Navigate to={notAuthenticatedRoute || '/'} state={{fromRoute: location.pathname}} />;
     }
-    if (roles && !roles?.every((p) => userRoles?.includes(p))) {
+
+    if (roles && !rolesHierarchy && !userRoles?.some((ur) => roles?.includes(ur))) {
+        notAuthorizedAction && notAuthorizedAction();
+        return <Navigate to={notAuthorizedRoute || '/'} state={{fromRoute: location.pathname}} />;
+    }
+
+    if (
+        roles &&
+        rolesHierarchy &&
+        !userRoles?.some((ur) => getAuthorizedRolesFromRolesHierarchy(roles[0], rolesHierarchy)?.includes(ur))
+    ) {
         notAuthorizedAction && notAuthorizedAction();
         return <Navigate to={notAuthorizedRoute || '/'} state={{fromRoute: location.pathname}} />;
     }

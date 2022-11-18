@@ -9,6 +9,7 @@ interface PrRoutesProps extends RoutesProps {
     notAuthenticatedRoute?: string;
     notAuthenticatedAction?: () => void;
     userRoles?: string[];
+    rolesHierarchy?: string[];
     notAuthorizedRoute?: string;
     notAuthorizedAction?: () => void;
 }
@@ -19,6 +20,7 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
         notAuthenticatedRoute,
         notAuthenticatedAction,
         userRoles,
+        rolesHierarchy,
         notAuthorizedRoute,
         notAuthorizedAction,
         children,
@@ -55,6 +57,7 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
                             roles={element.props.roles}
                             authenticated={authenticated}
                             userRoles={userRoles}
+                            rolesHierarchy={rolesHierarchy}
                             notAuthenticatedRoute={notAuthenticatedRoute}
                             notAuthenticatedAction={notAuthenticatedAction}
                             notAuthorizedRoute={notAuthorizedRoute}
@@ -65,7 +68,7 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
                     ),
                 };
             }
-            const route = cloneElement(<Route/>, routeProps, nextLevelChildren);
+            const route = cloneElement(<Route />, routeProps, nextLevelChildren);
             routes.push(route);
         });
 
@@ -74,9 +77,7 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
 
     return (
         <AuthProvider authenticated={authenticated} userRoles={userRoles}>
-            <Routes {...rest}>
-                {createRoutesFromChildren(children)}
-            </Routes>
+            <Routes {...rest}>{createRoutesFromChildren(children)}</Routes>
         </AuthProvider>
     );
 };
