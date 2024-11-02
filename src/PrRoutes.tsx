@@ -30,7 +30,7 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
     const createRoutesFromChildren = (children: ReactNode | ReactNode[]): ReactElement[] => {
         const routes: ReactElement[] = [];
 
-        React.Children.forEach(children, (element) => {
+        React.Children.forEach(children, (element, index) => {
             if (!React.isValidElement(element)) {
                 return;
             }
@@ -66,7 +66,7 @@ const PrRoutes = (props: PrRoutesProps): ReactElement | null => {
                 ),
             };
 
-            const route = cloneElement(<Route />, routeProps, nextLevelChildren);
+            const route = cloneElement(<Route key={`route-${element.props.path}-${index}`} />, routeProps, nextLevelChildren);
             routes.push(route);
         });
 
