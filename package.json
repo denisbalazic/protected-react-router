@@ -1,6 +1,6 @@
 {
   "name": "protected-react-router",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Authentication and authorization access control layer for react-router",
   "main": "build/index.js",
   "types": "build/index.d.ts",
